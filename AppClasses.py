@@ -1,8 +1,10 @@
 import pandas
+from abc import ABC, abstractmethod
 
 
 df = pandas.read_csv("hotels.csv")
-
+df_cards = pandas.read_csv("cards.csv", dtype=str).to_dict(orient="records")
+df_cards_security = pandas.read_csv("card_security.csv", dtype=str)
 
 class Hotel:
     def __init__(self, hotel_id):
@@ -23,9 +25,12 @@ class Hotel:
         else:
             return False
 
+class Ticket(ABC):
+    @abstractmethod
+    def generate(self):
+        pass
 
-
-class ReservationTicket:
+class ReservationTicket(Ticket):
     def __init__(self, cust_name, hotel_obj):
         self.cust_name = cust_name
         self.hotel = hotel_obj
@@ -38,3 +43,27 @@ class ReservationTicket:
         Hotel name: {self.hotel.hotel_name}
         """
         return content
+
+
+class CreditCard:
+    def __init__(self, cc_num, exp, holder, cvc):
+        self.cc_num = cc_num
+        self.exp = exp
+        self.holder = holder
+        self.cvc = cvc
+
+    def validate(self):
+        card_data = {"number":self.cc_num, "expiration": self.exp,
+                     "holder": self.holder, "cvc": self.cvc}
+        if card_data in df_cards:
+            return True
+        else:
+            return False
+
+class SecureCreditCard(CreditCard):
+    def authenticate(self, given_password):
+        password = df_cards_security.loc[df_cards_security["number"] == self.cc_num, "password"].squeeze()
+        if password == given_password:
+            return True
+        else:
+            return False
