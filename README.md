@@ -25,14 +25,14 @@ A Python-based application for booking hotels. This app allows users to check ho
 
 ## 📸 Screenshots
 
-![Screenshot 1](https://via.placeholder.com/800x400) <!-- Replace with your screenshot -->
-![Screenshot 2](https://via.placeholder.com/800x400) <!-- Replace with your screenshot -->
+![display1](images/display1.png)
+![display2](images/display2.png)
 
 ---
 
 ## 🎥 Demo
 
-![Demo Video](https://via.placeholder.com/800x400) <!-- Replace with your demo video -->
+[![Watch the video](https://img.youtube.com/vi/JOBgYGClkPU/0.jpg)](https://youtu.be/JOBgYGClkPU)
 
 ---
 
